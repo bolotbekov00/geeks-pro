@@ -1,6 +1,7 @@
 import './App.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
+import FetchImg from "./components/FetchImg.jsx";
 
 function App() {
 
@@ -11,7 +12,6 @@ function App() {
             const pokemon = async () => {
                 const response = await axios.get('https://pokeapi.co/api/v2/pokemon')
                 setPokemon(response.data.results)
-                // console.log(response.data.results)
             }
             pokemon()
         } catch (e) {
@@ -22,9 +22,9 @@ function App() {
 
     return (
         <div className="block">
-            {pokemon.map((poke) => (
-                <div key={poke.name} className="block-poke">
-                    <img src={poke.url}  alt="img-pokemon"/>
+            {pokemon.map((poke, index) => (
+                <div key={index} className="block-poke">
+                    <FetchImg url={poke.url} />
                     <h3 className="title">{poke.name}</h3>
                 </div>
             ))}
